@@ -27,26 +27,6 @@
   object-fit: scale-down;
 }
 
-.nav-bar {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav {
-  margin: 0 15px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: aliceblue;
-  user-select: none;
-}
-
-.nav:hover {
-  cursor: pointer;
-}
-
 .body {
   background-color: aliceblue;
   margin-top: 10vh;
@@ -54,7 +34,7 @@
   padding: 0 5vw;
 }
 
-.about {
+.about-area {
   padding: 5vh 30vw;
   background: no-repeat center right url('./assets/about.png');
   background-size: 25%;
@@ -68,6 +48,10 @@
 
 .content {
   font-size: 1.2rem;
+}
+
+.products-area {
+  padding: 5vh 0;
 }
 
 .footer {

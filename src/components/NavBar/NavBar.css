@@ -1,0 +1,25 @@
+.nav-bar {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+  
+.nav {
+    margin: 0 15px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: aliceblue;
+    user-select: none;
+}
+  
+a {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: inherit;
+}
+
+.nav:hover {
+    cursor: pointer;
+}

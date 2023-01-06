@@ -9,6 +9,7 @@
   flex-direction: row;
   box-sizing: border-box;
   box-shadow: 0 1px 1px lightsteelblue;
+  z-index: 1000;
 }
 
 .logo {
@@ -25,6 +26,14 @@
 
 .logo-img {
   object-fit: scale-down;
+}
+
+.cart-wrapper {
+  position: absolute;
+  right: 5vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .body {

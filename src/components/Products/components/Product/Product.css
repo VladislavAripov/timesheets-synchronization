@@ -5,11 +5,11 @@
   background-color: rgb(211, 234, 255);
   padding: 16px;
   border-radius: 8px;
+  box-sizing: content-box;
 }
 
 .product:hover {
   box-shadow: 3px 3px 5px lightgray;
-  cursor: pointer;
 }
 
 .product-image-wrapper {
@@ -34,8 +34,10 @@
 .product-price {
   font-size: 1rem;
   font-weight: 500;
+  margin-bottom: 4px;
 }
 
 .product-description {
   text-align: justify;
+  margin-bottom: 14px;
 }

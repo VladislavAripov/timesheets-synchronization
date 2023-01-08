@@ -8,6 +8,8 @@ import timeTracking from '../../assets/timeTracking.jpg';
 
 interface IProps {
   handleAddItemToCart: (product: IProduct) => void;
+  cartItems: IProduct[];
+  handleOpenCart: () => void;
 }
 
 const Products: React.FC<IProps> = (props: IProps) => {
@@ -37,7 +39,7 @@ const Products: React.FC<IProps> = (props: IProps) => {
       id: 4,
       image: analys,
       title: 'Анализ налоговой базы',
-      price: 1000,
+      price: 100000,
       description: 'Описание',
     },
     {
@@ -51,11 +53,13 @@ const Products: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className="products">
-      {products.map((item) => (
+      {products.map(item => (
         <Product
           key={item.id}
           item={item}
           handleAddItemToCart={props.handleAddItemToCart}
+          cartItems={props.cartItems}
+          handleOpenCart={props.handleOpenCart}
         />
       ))}
     </div>

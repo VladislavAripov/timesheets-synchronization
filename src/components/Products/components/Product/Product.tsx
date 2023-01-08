@@ -1,5 +1,5 @@
 import './Product.css';
-import { Button, Divider, Space, Modal } from 'antd';
+import { Button, Divider, Space, Modal, Tooltip } from 'antd';
 import { useState } from 'react';
 
 export interface IProduct {
@@ -13,6 +13,8 @@ export interface IProduct {
 interface IProps {
   item: IProduct;
   handleAddItemToCart: (product: IProduct) => void;
+  cartItems: IProduct[];
+  handleOpenCart: () => void;
 }
 
 const Product: React.FC<IProps> = (props: IProps) => {
@@ -40,19 +42,33 @@ const Product: React.FC<IProps> = (props: IProps) => {
         <div className="product-description">
           Описание: {props.item.description}
         </div>
-        <Space.Compact block size="large">
-          <Button
-            block
-            type="primary"
-            ghost
-            onClick={() => props.handleAddItemToCart(props.item)}
-          >
-            Купить
-          </Button>
-          <Button block type="default" danger ghost onClick={handleMoreClick}>
-            Подробнее
-          </Button>
-        </Space.Compact>
+        <div className="action-buttons-wrapper">
+          <Space.Compact block size="large">
+            {props.cartItems.find(cartItem => cartItem.id === props.item.id) ? (
+              <Tooltip title={'Товар уже в корзине'}>
+                <Button
+                  block
+                  type="primary"
+                  ghost
+                  onClick={props.handleOpenCart}
+                >
+                  В корзине
+                </Button>
+              </Tooltip>
+            ) : (
+              <Button
+                block
+                type="primary"
+                onClick={() => props.handleAddItemToCart(props.item)}
+              >
+                В корзину
+              </Button>
+            )}
+            <Button block type="primary" ghost onClick={handleMoreClick}>
+              Подробнее
+            </Button>
+          </Space.Compact>
+        </div>
       </div>
       <Modal
         open={isModalOpen}

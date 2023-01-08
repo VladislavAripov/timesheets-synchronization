@@ -7,8 +7,8 @@
 }
 
 .nav {
-  margin: 0 15px;
-  font-size: 1.5rem;
+  margin: 0 32px;
+  font-size: 1.6rem;
   font-weight: 500;
   color: aliceblue;
   user-select: none;
@@ -22,4 +22,6 @@ a {
 
 .nav:hover {
   cursor: pointer;
+  color: aqua;
+  text-decoration: underline;
 }

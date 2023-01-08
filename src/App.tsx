@@ -1,31 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import logo from './assets/logo.svg';
 import Cart from './components/Cart';
 import NavBar from './components/NavBar';
 import Products from './components/Products';
 import { IProduct } from './components/Products/components/Product';
+import cookiesNames from './constants/cookiesNames';
+import cookies from './utils/cookies';
 
 const loremIpsum =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
+export type CartItem = IProduct & {
+  count: number;
+};
+
 const App: React.FC = () => {
-  const [cartItems, setCartItems] = useState<IProduct[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+
+  useEffect(() => {
+    setCartItems(cookies.get(cookiesNames.cart) ?? []);
+  }, []);
 
   const handleAddItemToCart = (product: IProduct) => {
-    if (cartItems.find((cartItem) => cartItem.id === product.id)) return;
+    if (cartItems.find(cartItem => cartItem.id === product.id)) return;
 
-    setCartItems([...cartItems, product]);
+    const newCartItems = [...cartItems, { ...product, count: 1 }];
+
+    setCartItems(newCartItems);
+
+    handleCartItemsChange(newCartItems);
+  };
+
+  const handleCartItemCountChange = (cartItemId: number, newCount: number) => {
+    if (newCount < 1 || newCount > 100) return;
+
+    const newCartItems = cartItems.slice();
+    const cartItem = newCartItems.find(cartItem => cartItem.id == cartItemId);
+
+    if (!cartItem) return;
+
+    cartItem.count = newCount;
+    setCartItems(newCartItems);
+
+    handleCartItemsChange(newCartItems);
   };
 
   const handleRemoveItemFromCart = (product: IProduct) => {
-    setCartItems([
-      ...cartItems.filter((cartItem) => cartItem.id !== product.id),
-    ]);
+    const newCartItems = [
+      ...cartItems.filter(cartItem => cartItem.id !== product.id),
+    ];
+
+    setCartItems(newCartItems);
+
+    handleCartItemsChange(newCartItems);
   };
 
   const handleClearCart = () => {
     setCartItems([]);
+  };
+
+  const handleOpenCart = () => {
+    setIsCartModalOpen(true);
+  };
+
+  const handleCloseCart = () => {
+    setIsCartModalOpen(false);
+  };
+
+  const handleCartItemsChange = (newCartItems: CartItem[]) => {
+    cookies.set(cookiesNames.cart, newCartItems);
   };
 
   return (
@@ -50,12 +95,15 @@ const App: React.FC = () => {
             },
           ]}
         />
-
         <div className="cart-wrapper">
           <Cart
             cartItems={cartItems}
             handleRemoveItemFromCart={handleRemoveItemFromCart}
             handleClearCart={handleClearCart}
+            isCartModalOpen={isCartModalOpen}
+            handleOpenCart={handleOpenCart}
+            handleCloseCart={handleCloseCart}
+            handleCartItemCountChange={handleCartItemCountChange}
           />
         </div>
       </div>
@@ -66,7 +114,11 @@ const App: React.FC = () => {
         </div>
         <div className="products-area" id="products-area">
           <div className="title">Наши услуги</div>
-          <Products handleAddItemToCart={handleAddItemToCart} />
+          <Products
+            handleAddItemToCart={handleAddItemToCart}
+            cartItems={cartItems}
+            handleOpenCart={handleOpenCart}
+          />
         </div>
       </div>
       <div className="footer">

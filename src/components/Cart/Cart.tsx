@@ -7,11 +7,16 @@ import CartItemsTab from './components/CartItemsTab';
 import OrdersTab from './components/OrdersTab';
 import cookies from '../../utils/cookies';
 import cookiesNames from '../../constants/cookiesNames';
+import { CartItem } from '../../App';
 
 interface IProps {
-  cartItems: IProduct[];
+  cartItems: CartItem[];
   handleRemoveItemFromCart: (item: IProduct) => void;
   handleClearCart: () => void;
+  isCartModalOpen: boolean;
+  handleOpenCart: () => void;
+  handleCloseCart: () => void;
+  handleCartItemCountChange: (cartItemId: number, newCount: number) => void;
 }
 
 export interface IOrder {
@@ -22,7 +27,6 @@ export interface IOrder {
 }
 
 const Cart: React.FC<IProps> = (props: IProps) => {
-  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [orders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
@@ -34,14 +38,6 @@ const Cart: React.FC<IProps> = (props: IProps) => {
 
   const handleChangeOrders = (orders: IOrder[]) => {
     cookies.set(cookiesNames.orders, orders);
-  };
-
-  const handleOpenCart = () => {
-    setIsCartModalOpen(true);
-  };
-
-  const handleCloseCart = () => {
-    setIsCartModalOpen(false);
   };
 
   const handleAddOrder = (order: IOrder) => {
@@ -56,7 +52,7 @@ const Cart: React.FC<IProps> = (props: IProps) => {
   };
 
   const handleRemoveOrder = (orderToDelete: IOrder) => {
-    const newOrders = orders.filter((order) => order.id !== orderToDelete.id);
+    const newOrders = orders.filter(order => order.id !== orderToDelete.id);
 
     setOrders(newOrders);
 
@@ -73,14 +69,14 @@ const Cart: React.FC<IProps> = (props: IProps) => {
             shape="circle"
             style={{ color: 'white' }}
             icon={<ShoppingCartOutlined style={{ fontSize: '24px' }} />}
-            onClick={handleOpenCart}
+            onClick={props.handleOpenCart}
           />
         </Badge>
       </Space>
       <Modal
-        open={isCartModalOpen}
+        open={props.isCartModalOpen}
         footer={null}
-        onCancel={handleCloseCart}
+        onCancel={props.handleCloseCart}
         style={{ top: '11vh', right: '10px' }}
       >
         <Tabs
@@ -95,6 +91,7 @@ const Cart: React.FC<IProps> = (props: IProps) => {
                   cartItems={props.cartItems}
                   handleRemoveItemFromCart={props.handleRemoveItemFromCart}
                   handleAddOrder={handleAddOrder}
+                  handleCartItemCountChange={props.handleCartItemCountChange}
                 />
               ),
             },

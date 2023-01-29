@@ -1,0 +1,12 @@
+.loading-product {
+  margin: 0 50px 50px 50px;
+  width: 256px;
+  text-align: left;
+  background-color: rgb(211, 234, 255);
+  padding: 16px;
+  border-radius: 8px;
+  box-sizing: content-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

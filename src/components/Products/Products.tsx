@@ -1,10 +1,9 @@
-import Product, { IProduct } from './components/Product';
+import baseApiClient from 'api/baseApi/baseApiClient';
+import { IProduct } from 'api/baseApi/models/product';
+import { useEffect, useState } from 'react';
+import LoadingProduct from './components/LoadingProduct';
+import Product from './components/Product';
 import './Products.css';
-import analys from 'assets/analys.png';
-import calculateZP from 'assets/calculateZP.jpg';
-import calculateNalogVichet from 'assets/calculateNalogVichet.jpeg';
-import calculateNalogBase from 'assets/calculateNalogBase.jpg';
-import timeTracking from 'assets/timeTracking.jpg';
 
 interface IProps {
   handleAddItemToCart: (product: IProduct) => void;
@@ -13,43 +12,29 @@ interface IProps {
 }
 
 const Products: React.FC<IProps> = (props: IProps) => {
-  const products: IProduct[] = [
-    {
-      id: 1,
-      image: timeTracking,
-      title: 'Учет рабочего времени',
-      price: 10,
-      description: 'Описание',
-    },
-    {
-      id: 2,
-      image: calculateZP,
-      title: 'Расчет заработной платы',
-      price: 50,
-      description: 'Описание',
-    },
-    {
-      id: 3,
-      image: calculateNalogVichet,
-      title: 'Расчет налогового вычета',
-      price: 500,
-      description: 'Описание',
-    },
-    {
-      id: 4,
-      image: analys,
-      title: 'Анализ налоговой базы',
-      price: 100000,
-      description: 'Описание',
-    },
-    {
-      id: 5,
-      image: calculateNalogBase,
-      title: 'Расчет налоговой базы',
-      price: 5000,
-      description: 'Описание',
-    },
-  ];
+  const [products, setProducts] = useState<IProduct[]>();
+
+  useEffect(() => {
+    baseApiClient.get('/products').then(response => {
+      if (response.status === 200) {
+        setProducts(response.data);
+      } else {
+        console.log(
+          `Request on '${response.config.url}' has failed with status code ${response.status}`
+        );
+      }
+    });
+  }, []);
+
+  if (products === undefined) {
+    return (
+      <div className="loading-wrapper">
+        <LoadingProduct />
+        <LoadingProduct />
+        <LoadingProduct />
+      </div>
+    );
+  }
 
   return (
     <div className="products">

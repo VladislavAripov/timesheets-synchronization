@@ -1,10 +1,10 @@
 import Product, { IProduct } from './components/Product';
 import './Products.css';
-import analys from '../../assets/analys.png';
-import calculateZP from '../../assets/calculateZP.jpg';
-import calculateNalogVichet from '../../assets/calculateNalogVichet.jpeg';
-import calculateNalogBase from '../../assets/calculateNalogBase.jpg';
-import timeTracking from '../../assets/timeTracking.jpg';
+import analys from 'assets/analys.png';
+import calculateZP from 'assets/calculateZP.jpg';
+import calculateNalogVichet from 'assets/calculateNalogVichet.jpeg';
+import calculateNalogBase from 'assets/calculateNalogBase.jpg';
+import timeTracking from 'assets/timeTracking.jpg';
 
 interface IProps {
   handleAddItemToCart: (product: IProduct) => void;

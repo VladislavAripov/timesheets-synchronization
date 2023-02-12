@@ -7,9 +7,10 @@ import Products from 'components/Products';
 import cookiesNames from 'constants/cookiesNames';
 import cookies from 'utils/cookies';
 import { IProduct } from 'api/baseApi/models/product';
+import { YMaps, Map, Placemark, Clusterer } from 'react-yandex-maps';
 
-const loremIpsum =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const aboutText =
+  'Ведение бухучета для юридических лиц. Вам откроются все возможности бухгалетрского учета. Эльба сформирует отчёты за вас и ваших сотрудников в налоговую, ПФР, ФСС и Росстат. А ещё выпустит электронную подпись, чтобы отправлять отчёты прямо из сервиса. Сдавайте отчёты, считайте налоги, создавайте счета, акты и накладные. Проведем начинающих ИП через налоговые лабиринты, научим работать с сотрудниками и поможем разобраться с онлайн-кассой.';
 
 export type CartItem = IProduct & {
   count: number;
@@ -110,8 +111,8 @@ const App: React.FC = () => {
       </div>
       <div className="body">
         <div className="about-area" id="about-area">
-          <div className="title">Lorem ipsum</div>
-          <div className="content">{loremIpsum}</div>
+          <div className="title">О нас</div>
+          <div className="content">{aboutText}</div>
         </div>
         <div className="products-area" id="products-area">
           <div className="title">Наши услуги</div>
@@ -123,12 +124,42 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="footer">
-        <div className="contacts" id="contacts">
-          Контакты:
-          <div className="contact">+7 939.. - Владислав</div>
-          <div className="contact">+7 939.. - Владислав</div>
-          <div className="contact">+7 939.. - Владислав</div>
-          <div className="contact">+7 939.. - Владислав</div>
+        <div className="footer-body">
+          <div className="contacts" id="contacts">
+            <span className="footer-title">Контакты:</span>
+            <div className="contact">
+              +7 (843)-312-42-12 - Отдел продвижения
+            </div>
+            <div className="contact">+7 (843)-330-24-05 - Центр поддержки</div>
+            <div className="contact">+7 (843)-312-32-12 - Отдел продаж</div>
+            <div className="contact">+7 (843)-231-32-23 - Администрация</div>
+          </div>
+          <div className="yandex-map-wrapper">
+            <div className="footer-title">Мы на карте:</div>
+            <YMaps query={{ mode: 'debug' }}>
+              <Map
+                className="yandex-map"
+                options={{
+                  autoFitToViewport: 'always',
+                  yandexMapDisablePoiInteractivity: true,
+                }}
+                defaultState={{ center: [55.779474, 49.128126], zoom: 15 }}
+              >
+                <Placemark
+                  geometry={[55.779474, 49.128126]}
+                  properties={{
+                    iconCaption: 'Мы ждем вас здесь!',
+                  }}
+                />
+              </Map>
+            </YMaps>
+          </div>
+          <div className="social-networks-wrapper">
+            <span className="footer-title">Мы в соцсетях:</span>
+            <div className="social-networks">
+              <div className="social-network"></div>
+            </div>
+          </div>
         </div>
         <div className="rights">
           © Все права защищены. ООО &quot;Фрукты жи есть&quot;.

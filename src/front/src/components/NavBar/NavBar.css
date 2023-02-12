@@ -3,7 +3,6 @@
   flex: 1;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 }
 
 .nav {
@@ -22,6 +21,6 @@ a {
 
 .nav:hover {
   cursor: pointer;
-  color: aqua;
+  color: white;
   text-decoration: underline;
 }

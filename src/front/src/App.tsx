@@ -8,6 +8,10 @@ import cookiesNames from 'constants/cookiesNames';
 import cookies from 'utils/cookies';
 import { IProduct } from 'api/baseApi/models/product';
 import { YMaps, Map, Placemark, Clusterer } from 'react-yandex-maps';
+import SocialNetworks from 'components/social_networks/SocialNetworks';
+import vkIcon from 'assets/vk.svg';
+import telegramIcon from 'assets/telegram.svg';
+import whatsappIcon from 'assets/whatsapp.svg';
 
 const aboutText =
   'Ведение бухучета для юридических лиц. Вам откроются все возможности бухгалетрского учета. Эльба сформирует отчёты за вас и ваших сотрудников в налоговую, ПФР, ФСС и Росстат. А ещё выпустит электронную подпись, чтобы отправлять отчёты прямо из сервиса. Сдавайте отчёты, считайте налоги, создавайте счета, акты и накладные. Проведем начинающих ИП через налоговые лабиринты, научим работать с сотрудниками и поможем разобраться с онлайн-кассой.';
@@ -156,9 +160,13 @@ const App: React.FC = () => {
           </div>
           <div className="social-networks-wrapper">
             <span className="footer-title">Мы в соцсетях:</span>
-            <div className="social-networks">
-              <div className="social-network"></div>
-            </div>
+            <SocialNetworks
+              items={[
+                { icon: vkIcon, src: 'https://vk.com' },
+                { icon: telegramIcon, src: 'https://telegram.org' },
+                { icon: whatsappIcon, src: 'https://whatsapp.com' },
+              ]}
+            />
           </div>
         </div>
         <div className="rights">

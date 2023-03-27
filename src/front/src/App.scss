@@ -1,0 +1,133 @@
+@import 'constants/styles.scss';
+
+.header {
+  background-color: $header-background-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: $header-height;
+  padding: 0 $page-horizontal-padding;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  box-shadow: 0 1px 1px $shadow-color;
+  z-index: 1000;
+
+  .logo {
+    position: absolute;
+    left: calc($page-horizontal-padding - (calc($header-height - 30px) + 32px));
+    height: calc($header-height - 30px);
+    width: calc($header-height - 30px);
+    padding: 15px 0;
+    user-select: none;
+
+    .logo-img {
+      object-fit: scale-down;
+    }
+  }
+  .logo:hover {
+    cursor: pointer;
+  }
+
+  .cart-wrapper {
+    position: absolute;
+    right: $page-horizontal-padding;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.body {
+  background-color: $body-background-color;
+  margin-top: $header-height;
+  min-height: calc(100vh - $header-height - $footer-height);
+  padding: 0 $page-horizontal-padding;
+
+  .about-area {
+    padding: 5vh 20vw;
+    background: no-repeat center right url('./assets/about.png');
+    background-size: 25%;
+  }
+
+  .products-area {
+    padding: 5vh 0;
+  }
+
+  .title {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .content {
+    font-size: 1.2rem;
+  }
+}
+
+.footer {
+  color: $inversed-text-color;
+  background-color: $footer-background-color;
+  height: $footer-height;
+  padding: 0 $page-horizontal-padding;
+  box-shadow: 0 -5px 30px $shadow-color;
+  display: flex;
+  flex-direction: column;
+
+  .footer-body {
+    padding: 24px 0;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 48px;
+
+    .footer-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      width: 100%;
+      text-align: start;
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+
+      .contact {
+        font-size: 1rem;
+        margin: 2px 0;
+        font-weight: 400;
+      }
+    }
+
+    .yandex-map-wrapper {
+      min-width: 300px;
+      width: 600px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .yandex-map {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .social-networks-wrapper {
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .rights {
+    display: flex;
+    height: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -8,12 +8,12 @@
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
-}
 
-.custom-skeleton-button-style {
-  width: 100% !important;
-}
+  .custom-skeleton-button-style {
+    width: 100% !important;
+  }
 
-.ant-space-item {
-  width: 45%;
+  .ant-space-item {
+    width: 45%;
+  }
 }

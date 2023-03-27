@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'App.css';
 import logo from 'assets/logo.svg';
 import Cart from 'components/Cart';
 import NavBar from 'components/NavBar';
@@ -7,11 +6,12 @@ import Products from 'components/Products';
 import cookiesNames from 'constants/cookiesNames';
 import cookies from 'utils/cookies';
 import { IProduct } from 'api/baseApi/models/product';
-import { YMaps, Map, Placemark, Clusterer } from 'react-yandex-maps';
+import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import SocialNetworks from 'components/social_networks/SocialNetworks';
 import vkIcon from 'assets/vk.svg';
 import telegramIcon from 'assets/telegram.svg';
 import whatsappIcon from 'assets/whatsapp.svg';
+import 'App.scss';
 
 const aboutText =
   'Ведение бухучета для юридических лиц. Вам откроются все возможности бухгалетрского учета. Эльба сформирует отчёты за вас и ваших сотрудников в налоговую, ПФР, ФСС и Росстат. А ещё выпустит электронную подпись, чтобы отправлять отчёты прямо из сервиса. Сдавайте отчёты, считайте налоги, создавайте счета, акты и накладные. Проведем начинающих ИП через налоговые лабиринты, научим работать с сотрудниками и поможем разобраться с онлайн-кассой.';

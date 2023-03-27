@@ -1,0 +1,27 @@
+@import 'constants/styles.scss';
+
+.nav-bar {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+
+  .nav {
+    margin: 0 32px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: $inversed-text-color;
+    user-select: none;
+  }
+  .nav:hover {
+    cursor: pointer;
+    color: $inversed-text-hover-color;
+    text-decoration: underline;
+  }
+
+  a {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: inherit;
+  }
+}

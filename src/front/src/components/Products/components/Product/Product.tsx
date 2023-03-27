@@ -1,7 +1,7 @@
-import './Product.css';
 import { Button, Divider, Space, Modal, Tooltip } from 'antd';
 import { useState } from 'react';
 import { IProduct } from 'api/baseApi/models/product';
+import './Product.scss';
 
 interface IProps {
   item: IProduct;

@@ -1,5 +1,5 @@
-import './NavBar.css';
 import { HashLink } from 'react-router-hash-link';
+import './NavBar.scss';
 
 interface INavBarItem {
   title: string;

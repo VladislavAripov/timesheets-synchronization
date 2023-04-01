@@ -6,8 +6,6 @@ import Product from './components/Product';
 import './Products.scss';
 
 interface IProps {
-  handleAddItemToCart: (product: IProduct) => void;
-  cartItems: IProduct[];
   handleOpenCart: () => void;
 }
 
@@ -43,8 +41,6 @@ const Products: React.FC<IProps> = (props: IProps) => {
         <Product
           key={item.id}
           item={item}
-          handleAddItemToCart={props.handleAddItemToCart}
-          cartItems={props.cartItems}
           handleOpenCart={props.handleOpenCart}
         />
       ))}

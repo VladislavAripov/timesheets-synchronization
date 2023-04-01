@@ -2,15 +2,18 @@ import { Button, Divider, Space, Modal, Tooltip } from 'antd';
 import { useState } from 'react';
 import { IProduct } from 'api/baseApi/models/product';
 import './Product.scss';
+import { RootState } from 'redux/rootReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct } from 'redux/ducks/cart_list';
 
 interface IProps {
   item: IProduct;
-  handleAddItemToCart: (product: IProduct) => void;
-  cartItems: IProduct[];
   handleOpenCart: () => void;
 }
 
 const Product: React.FC<IProps> = (props: IProps) => {
+  const cartState = useSelector((state: RootState) => state.cartList);
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleMoreClick = () => {
@@ -37,7 +40,7 @@ const Product: React.FC<IProps> = (props: IProps) => {
         </div>
         <div className="action-buttons-wrapper">
           <Space.Compact block size="large">
-            {props.cartItems.find(cartItem => cartItem.id === props.item.id) ? (
+            {cartState.items.find(cartItem => cartItem.id === props.item.id) ? (
               <Tooltip title={'Товар уже в корзине'}>
                 <Button
                   block
@@ -52,7 +55,7 @@ const Product: React.FC<IProps> = (props: IProps) => {
               <Button
                 block
                 type="primary"
-                onClick={() => props.handleAddItemToCart(props.item)}
+                onClick={() => dispatch(addProduct(props.item))}
               >
                 В корзину
               </Button>

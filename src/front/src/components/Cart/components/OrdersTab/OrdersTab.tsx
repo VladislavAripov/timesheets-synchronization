@@ -1,24 +1,29 @@
 import { Collapse } from 'antd';
-import { IOrder } from '../../Cart';
 import CartList from '../CartList';
 import './OrdersTab.scss';
+import { RootState } from 'redux/rootReducer';
+import { useSelector } from 'react-redux';
 
 const { Panel } = Collapse;
 
-interface IProps {
-  orders: IOrder[];
-  handleRemoveItemFromOrders: (order: IOrder) => void;
-}
+const OrdersTab: React.FC = () => {
+  const ordersState = useSelector((state: RootState) => state.ordersList);
 
-const OrdersTab: React.FC<IProps> = (props: IProps) => {
   return (
     <>
-      {props.orders.map(order => (
+      {ordersState.items.map(order => (
+        // eslint-disable-next-line
         <div key={order.id!} className="order-collapse-wrapper">
           <Collapse>
             <Panel
+              // eslint-disable-next-line
               key={order.id!}
-              header={`${order.date} - ${order.totalPrice} ₽`}
+              header={`${new Date(order.date).toLocaleDateString(
+                'ru-Ru'
+              )} ${new Date(order.date).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })} - ${order.totalPrice} ₽`}
             >
               <CartList cartItems={order.products} />
             </Panel>
